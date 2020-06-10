@@ -1,23 +1,29 @@
 import os
+import random
 
-import discord
+from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='!')
 
-@client.event
+random.seed()
+
+@bot.event
 async def on_ready():
-    print(f'{client.user} has connected to Discord!')
+    print(f'{bot.user} has connected to Discord!')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.command(name='wholesome')
+async def wholesome(ctx):
+    wholesomeLevel = random.randint(0, 100)
 
-    if message.content == 'test':
-        await message.channel.send('Test!')
+    if wholesomeLevel < 100:
+        wholesomeMessage = ' is wholesome ' + str(wholesomeLevel)
+    else:
+        wholesomeMessage = ' IS WHOLESOME 100!!!!!!!!!'
 
-client.run(TOKEN)
+    await ctx.send(ctx.author.mention + wholesomeMessage)
+
+bot.run(TOKEN)
