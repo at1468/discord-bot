@@ -25,6 +25,15 @@ async def wholesome(ctx):
     else:
         await ctx.send(file=discord.File('media/wholesome100.jpg'))
 
+@bot.command(name='economy')
+async def economy(ctx):
+    economyDirection = random.randint(0, 1)
+
+    if economyDirection == 0:
+        await ctx.send('\N{chart with downwards trend}')
+    else:
+        await ctx.send('\N{chart with upwards trend}')
+
 
 
 bot.run(TOKEN)
