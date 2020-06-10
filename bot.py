@@ -1,6 +1,7 @@
 import os
 import random
 
+import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -20,10 +21,10 @@ async def wholesome(ctx):
     wholesomeLevel = random.randint(0, 100)
 
     if wholesomeLevel < 100:
-        wholesomeMessage = ' is wholesome ' + str(wholesomeLevel)
+        await ctx.send(ctx.author.mention + ' is wholesome ' + str(wholesomeLevel))
     else:
-        wholesomeMessage = ' IS WHOLESOME 100!!!!!!!!!'
+        await ctx.send(file=discord.File('media/wholesome100.jpg'))
 
-    await ctx.send(ctx.author.mention + wholesomeMessage)
+
 
 bot.run(TOKEN)
